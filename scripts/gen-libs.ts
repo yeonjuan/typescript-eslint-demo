@@ -20,7 +20,7 @@ import { createMinifier } from "dts-minify";
   function resolveToOutput(relPath: string): string {
     return path.resolve(OUTPUT_PATH, relPath);
   }
-  
+
   function toProperty(fileName: string, text: string) {
     return `["${fileName}"]: \`${minifiler
       .minify(text)
