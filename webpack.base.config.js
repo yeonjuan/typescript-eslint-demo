@@ -1,10 +1,7 @@
 const path = require("path");
 const HtmlPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
-
-function reolveToDir(relPath) {
-  return path.resolve(__dirname, relPath);
-}
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
   module: {
@@ -75,6 +72,7 @@ module.exports = {
       template: "./src/index.html",
       filename: "./index.html",
     }),
+    new FaviconsWebpackPlugin(path.resolve(__dirname, "./assets/favicon.ico"))
   ],
   output: {
     filename: "[name].[hash].js",
