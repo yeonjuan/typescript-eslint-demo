@@ -44,11 +44,15 @@ export const App: FC = () => {
         <Row>
           <Col md={12}>
             <h5> Code</h5>
-            <Editor
-              initial={DEFAULT_CODE}
-              onChange={setCode}
-              messages={messages}
-            />
+            <Tabs>
+              <Tab eventKey="code" title="Code">
+                <Editor
+                  initial={DEFAULT_CODE}
+                  onChange={setCode}
+                  messages={messages}
+                />
+              </Tab>
+            </Tabs>
           </Col>
         </Row>
         <Row>
