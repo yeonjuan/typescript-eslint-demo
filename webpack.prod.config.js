@@ -30,6 +30,7 @@ module.exports = merge(baseConfig, {
   plugins: [new BundleAnalyzerPlugin()],
   output: {
     filename: "[name].[hash].js",
+    chunkFilename: "[name].[hash].js",
     publicPath: "./",
   },
 });
