@@ -1,7 +1,5 @@
 const { merge } = require("lodash");
 const baseConfig = require("./webpack.base.config");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = merge(baseConfig, {
@@ -27,7 +25,6 @@ module.exports = merge(baseConfig, {
       },
     },
   },
-  plugins: [new BundleAnalyzerPlugin()],
   output: {
     filename: "[name].[hash].js",
     chunkFilename: "[name].[hash].js",
