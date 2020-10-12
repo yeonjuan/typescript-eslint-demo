@@ -1,0 +1,8 @@
+.CodeMirror {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.editor-error {
+  text-decoration: underline dashed red;
+}
