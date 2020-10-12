@@ -7,7 +7,13 @@ header h2 {
   margin: 0 0 10px;
   padding: 0;
 }
+ul {
+  margin-bottom: 0;
+}
 
-.versions {
-  float: right;
+li {
+  list-style: none;
+}
+.version {
+  font-size: 10px;
 }

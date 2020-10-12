@@ -7,3 +7,6 @@ main {
 .row {
   margin-top: 20px;
 }
+.versions {
+  float: right;
+}
