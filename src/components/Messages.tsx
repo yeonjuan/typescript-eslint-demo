@@ -2,7 +2,7 @@ import React from "react";
 import { Message } from "@/components/Message";
 import { Alert } from "react-bootstrap";
 import type { FC } from "react";
-import type {Linter} from "eslint";
+import type { Linter } from "eslint";
 
 interface Props {
   messages?: Linter.LintMessage[];
