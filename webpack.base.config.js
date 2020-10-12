@@ -72,7 +72,7 @@ module.exports = {
       template: "./src/index.html",
       filename: "./index.html",
     }),
-    new FaviconsWebpackPlugin(path.resolve(__dirname, "./assets/favicon.ico"))
+    new FaviconsWebpackPlugin(path.resolve(__dirname, "./assets/favicon.png"))
   ],
   output: {
     filename: "[name].[hash].js",
