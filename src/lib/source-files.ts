@@ -6,20 +6,14 @@ export interface SourceFiles {
   [name: string]: SourceFile;
 }
 
-function createTSSourceFile (name: string, code: string) {
-  return createSourceFile(
-    name,
-    code,
-    ScriptTarget.Latest,
-    true,
-    ScriptKind.TS
-  );
+function createTSSourceFile(name: string, code: string) {
+  return createSourceFile(name, code, ScriptTarget.Latest, true, ScriptKind.TS);
 }
 
 const LIB_SOURCE_FILES = Object.entries(LIB_FILES).reduce(
   (sourceFiles, [name, code]) => ({
     ...sourceFiles,
-    [name]: createTSSourceFile(name, code)
+    [name]: createTSSourceFile(name, code),
   })
 );
 
@@ -28,6 +22,6 @@ export function createSourceFilesIncludeLibs(
   code: string
 ): SourceFiles {
   return Object.assign(LIB_SOURCE_FILES, {
-    [name]: createTSSourceFile(name, code)
+    [name]: createTSSourceFile(name, code),
   });
 }
