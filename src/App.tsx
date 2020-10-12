@@ -7,6 +7,7 @@ import { Header } from "@/components/Header";
 import { Fixed } from "@/components/Fixed";
 import { loadDemoLinter, DemoLinter } from "@/lib/linter";
 import { DEFAULT_CODE, DEFAULT_RULE_CONFIG } from "@/components/constants";
+import { queryParamsState } from "@/shared/query-params-state";
 import type { FC } from "react";
 import type { Linter } from "eslint";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,9 +20,10 @@ const parserOptions = {
 } as const;
 
 export const App: FC = () => {
+  const paramsState = queryParamsState.get();
   const [messages, setMessages] = useState<Linter.LintMessage[]>([]);
-  const [code, setCode] = useState<string>(DEFAULT_CODE);
-  const [rules, setRules] = useState(DEFAULT_RULE_CONFIG);
+  const [code, setCode] = useState<string>(paramsState?.code || DEFAULT_CODE);
+  const [rules, setRules] = useState(paramsState?.rules || DEFAULT_RULE_CONFIG);
   const [fixed, setFixed] = useState<string>("");
   const [linter, setLinter] = useState<DemoLinter | null>(null);
 
@@ -43,12 +45,14 @@ export const App: FC = () => {
       <Container>
         <Row>
           <Col md={12}>
-            <h5> Code</h5>
             <Tabs>
               <Tab eventKey="code" title="Code">
                 <Editor
-                  initial={DEFAULT_CODE}
-                  onChange={setCode}
+                  initial={queryParamsState.get().code || DEFAULT_CODE}
+                  onChange={(code) => {
+                    queryParamsState.set({ code, rules });
+                    setCode(code);
+                  }}
                   messages={messages}
                 />
               </Tab>
@@ -66,6 +70,7 @@ export const App: FC = () => {
                     try {
                       const rules = JSON.parse(rulesString);
                       setRules(rules);
+                      queryParamsState.set({ code, rules });
                     } catch {}
                   }}
                 />
