@@ -5,6 +5,11 @@ header {
 .version-badge {
   margin-left: 10px;
 }
+
+.gh-btn {
+  margin-left: 10px;
+}
+
 ul {
   margin-bottom: 0;
 }
