@@ -8,7 +8,7 @@ export const Header: FC = () => (
   <Navbar bg="light">
     <Navbar.Brand>
       TypeScript ESLint Demo
-      <Badge variant="secondary">v{pkgJson.version}</Badge>
+      <Badge variant="secondary" className="version-badge">v{pkgJson.version}</Badge>
     </Navbar.Brand>
 
     <Navbar.Collapse className="justify-content-end">

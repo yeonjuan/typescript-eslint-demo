@@ -2,15 +2,12 @@ header {
   padding: 10px;
 }
 
-header h2 {
-  display: inline;
-  margin: 0 0 10px;
-  padding: 0;
+.version-badge {
+  margin-left: 10px;
 }
 ul {
   margin-bottom: 0;
 }
-
 li {
   list-style: none;
 }
