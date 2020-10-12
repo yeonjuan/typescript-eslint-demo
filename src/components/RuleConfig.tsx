@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import CodeMirror from "codemirror";
+import { EDITING_TIMEOUT } from "@/components/constants";
+import { debounce } from "@/shared/debounce";
 import type { FC } from "react";
 import type { Linter } from "eslint";
 import "codemirror/lib/codemirror.css";
@@ -33,11 +35,14 @@ export const RuleConfig: FC<Props> = (props) => {
         ref.current,
         CODE_MIRROR_OPTIONS
       );
-      codeMirror.on("change", () => {
-        const value = codeMirror.getValue();
-        props.onChange?.(value);
-        setText(value);
-      });
+      codeMirror.on(
+        "change",
+        debounce(() => {
+          const value = codeMirror.getValue();
+          props.onChange?.(value);
+          setText(value);
+        }, EDITING_TIMEOUT)
+      );
     }
   }, []);
 

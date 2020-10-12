@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import CodeMirror from "codemirror";
+import { debounce } from "@/shared/debounce";
+import { EDITING_TIMEOUT } from "@/components/constants";
 import type { FC } from "react";
 import type { Linter } from "eslint";
 import type { TextMarker, Editor as CodeEditor } from "codemirror";
@@ -27,14 +29,16 @@ export const Editor: FC<Props> = (props) => {
   const [errorMarkers, setErrorMarkers] = useState<TextMarker[]>([]);
   const ref = useRef<HTMLTextAreaElement>(null);
 
+  const changeHandler = debounce(() => {
+    const value = editor?.getValue() ?? "";
+    props.onChange?.(value);
+    setText(value);
+  }, EDITING_TIMEOUT);
+
   useEffect(() => {
     if (ref.current) {
       editor = CodeMirror.fromTextArea(ref.current, CODE_MIRROR_OPTIONS);
-      editor.on("change", () => {
-        const value = editor?.getValue() ?? "";
-        props.onChange?.(value);
-        setText(value);
-      });
+      editor.on("change", changeHandler);
     }
   }, []);
 
