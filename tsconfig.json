@@ -12,7 +12,8 @@
       "@/*": ["./src/*"]
     },
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"]
 }
