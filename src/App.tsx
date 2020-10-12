@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
+import { Container, Row, Col, Tabs, Tab, Spinner } from "react-bootstrap";
 import { Editor } from "@/components/Editor";
 import { RuleConfig } from "@/components/RuleConfig";
 import { Messages } from "@/components/Messages";
@@ -78,14 +78,23 @@ export const App: FC = () => {
             </Tabs>
           </Col>
           <Col>
-            <Tabs>
-              <Tab eventKey="messages" title="Messages">
-                <Messages messages={messages} />
-              </Tab>
-              <Tab eventKey="fixed" title="Fixed">
-                <Fixed code={fixed} />
-              </Tab>
-            </Tabs>
+            {linter === null ? (
+              <div>
+                <Spinner animation="border" role="status" variant="primary">
+                  <span className="sr-only">Loading...</span>
+                </Spinner>
+                Loading... please wait
+              </div>
+            ) : (
+              <Tabs>
+                <Tab eventKey="messages" title="Messages">
+                  <Messages messages={messages} />
+                </Tab>
+                <Tab eventKey="fixed" title="Fixed">
+                  <Fixed code={fixed} />
+                </Tab>
+              </Tabs>
+            )}
           </Col>
         </Row>
       </Container>
