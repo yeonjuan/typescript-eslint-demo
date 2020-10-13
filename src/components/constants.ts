@@ -1,7 +1,7 @@
 import type { Linter } from "eslint";
 
 export const EDITING_TIMEOUT = 300;
-
+export const TS_ESLINT_SCOPE = "@typescript-eslint";
 export const DEFAULT_CODE = `
 async function invalidInTryCatch1() {
   try {
