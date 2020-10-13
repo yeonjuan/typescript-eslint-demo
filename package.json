@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/yeonjuan/typescript-eslint-demo#readme",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "4.4.0",
+    "@typescript-eslint/eslint-plugin": "4.4.1",
     "@typescript-eslint/parser": "4.4.0",
     "bootstrap": "^4.5.2",
     "codemirror": "^5.58.1",
