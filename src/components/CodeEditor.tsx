@@ -25,6 +25,7 @@ export const CodeEditor: FC<Props> = (props) => (
       id="code"
       mode="text/typescript"
       initial={props.initial}
+      onChange={props.onChange}
       markers={props.messages?.map(messageToMarker)}
     />
   </div>
