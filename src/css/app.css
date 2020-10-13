@@ -7,6 +7,9 @@ main {
 .row {
   margin-top: 20px;
 }
+.bottom-col {
+  overflow: auto;
+}
 .versions {
   float: right;
 }

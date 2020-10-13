@@ -60,7 +60,7 @@ export const App: FC = () => {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col className="bottom-col">
             <Tabs>
               <Tab eventKey="rules" title="Rules">
                 <RuleConfig
@@ -77,7 +77,7 @@ export const App: FC = () => {
               </Tab>
             </Tabs>
           </Col>
-          <Col>
+          <Col className="bottom-col">
             {linter === null ? (
               <div>
                 <Spinner animation="border" role="status" variant="primary">
