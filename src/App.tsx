@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Tabs, Tab, Spinner } from "react-bootstrap";
-import { Editor } from "@/components/Editor";
+import { CodeEditor } from "@/components/CodeEditor";
 import { RuleConfig } from "@/components/RuleConfig";
 import { Messages } from "@/components/Messages";
 import { Header } from "@/components/Header";
@@ -38,7 +38,7 @@ export const App: FC = () => {
   useEffect(() => {
     (async () => setLinter(await loadDemoLinter()))();
   }, []);
-
+  console.log(queryParamsState.get().code || DEFAULT_CODE);
   return (
     <>
       <Header />
@@ -47,7 +47,7 @@ export const App: FC = () => {
           <Col md={12}>
             <Tabs>
               <Tab eventKey="code" title="Code">
-                <Editor
+                <CodeEditor
                   initial={queryParamsState.get().code || DEFAULT_CODE}
                   onChange={(code) => {
                     queryParamsState.set({ code, rules });
