@@ -12,14 +12,14 @@ interface Props {
 }
 
 export const LintMessages: FC<Props> = (props) => {
-  if (!(props.messages?.length)) {
+  if (!props.messages?.length) {
     return <Alert variant="success"> Lint Free :) </Alert>;
   }
 
   return (
     <>
       {props.messages?.map(
-        ({ line, column, message: lintMsg, ruleId, fatal }, index) => {
+        ({ line = 0, column = 0, message: lintMsg, ruleId, fatal }, index) => {
           const variant = fatal ? "danger" : "primary";
           const key = `lint-msg-${index}`;
           const docUrl = `${DOCS_PATH}${ruleId?.replace(
