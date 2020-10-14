@@ -11,12 +11,12 @@ interface Props {
   message: Linter.LintMessage;
 }
 
-export const Message: FC<Props> = ({ message }) => {
-  const { line, column, message: lintMsg, ruleId, fatal } = message;
+export const LintMessage: FC<Props> = (props) => {
+  const { line, column, message: lintMsg, ruleId, fatal } = props.message;
 
   return (
     <Alert variant={fatal ? "danger" : "primary"}>
-      {`${line}:${column} - ${lintMsg} (`}
+      {`${line}:${column} - ${lintMsg}`}(
       <Alert.Link
         target="_blank"
         rel="noopener noreferrer"
@@ -24,7 +24,7 @@ export const Message: FC<Props> = ({ message }) => {
       >
         {ruleId}
       </Alert.Link>
-      {")"}
+      )
     </Alert>
   );
 };

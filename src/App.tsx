@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Tabs, Tab, Spinner } from "react-bootstrap";
 import { CodeEditor } from "@/components/CodeEditor";
 import { RuleConfig } from "@/components/RuleConfig";
-import { Messages } from "@/components/Messages";
+import { LintMessages } from "@/components/LintMessages";
 import { Header } from "@/components/Header";
 import { Fixed } from "@/components/Fixed";
 import { loadDemoLinter, DemoLinter } from "@/lib/linter";
@@ -88,7 +88,7 @@ export const App: FC = () => {
             ) : (
               <Tabs>
                 <Tab eventKey="messages" title="Messages">
-                  <Messages messages={messages} />
+                  <LintMessages messages={messages} />
                 </Tab>
                 <Tab eventKey="fixed" title="Fixed">
                   <Fixed code={fixed} />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Message } from "@/components/Message";
+import { LintMessage } from "@/components/LintMessage";
 import { Alert } from "react-bootstrap";
 import type { FC } from "react";
 import type { Linter } from "eslint";
@@ -8,15 +8,15 @@ interface Props {
   messages?: Linter.LintMessage[];
 }
 
-export const Messages: FC<Props> = ({ messages }) => {
-  if (messages?.length === 0) {
+export const LintMessages: FC<Props> = (props) => {
+  if (props.messages?.length === 0) {
     return <Alert variant="success"> Lint Free :) </Alert>;
   }
 
   return (
     <>
-      {messages?.map((message, index) => (
-        <Message key={index} message={message} />
+      {props.messages?.map((message, index) => (
+        <LintMessage key={index} message={message} />
       ))}
     </>
   );
