@@ -3,6 +3,7 @@ import { Container, Row, Col, Tabs, Tab, Spinner } from "react-bootstrap";
 import { CodeEditor } from "@/components/CodeEditor";
 import { RuleConfig } from "@/components/RuleConfig";
 import { LintMessages } from "@/components/LintMessages";
+import { ErrorMessage } from "@/components/ErrorMessage";
 import { Header } from "@/components/Header";
 import { Fixed } from "@/components/Fixed";
 import { loadDemoLinter, DemoLinter } from "@/lib/linter";
@@ -26,6 +27,7 @@ export const App: FC = () => {
   const [rules, setRules] = useState(paramsState?.rules || DEFAULT_RULE_CONFIG);
   const [fixed, setFixed] = useState<string>("");
   const [linter, setLinter] = useState<DemoLinter | null>(null);
+  const [ruleConfigError, setRuleConfigError] = useState<Error | null>(null);
 
   useEffect(() => {
     if (linter) {
@@ -38,7 +40,7 @@ export const App: FC = () => {
   useEffect(() => {
     (async () => setLinter(await loadDemoLinter()))();
   }, []);
-  console.log(queryParamsState.get().code || DEFAULT_CODE);
+
   return (
     <>
       <Header />
@@ -71,7 +73,10 @@ export const App: FC = () => {
                       const rules = JSON.parse(rulesString);
                       setRules(rules);
                       queryParamsState.set({ code, rules });
-                    } catch {}
+                      setRuleConfigError(null);
+                    } catch (error) {
+                      setRuleConfigError(error);
+                    }
                   }}
                 />
               </Tab>
@@ -88,7 +93,14 @@ export const App: FC = () => {
             ) : (
               <Tabs>
                 <Tab eventKey="messages" title="Messages">
-                  <LintMessages messages={messages} />
+                  {ruleConfigError ? (
+                    <ErrorMessage
+                      origin="ruleconfig.json"
+                      error={ruleConfigError}
+                    />
+                  ) : (
+                    <LintMessages messages={messages} />
+                  )}
                 </Tab>
                 <Tab eventKey="fixed" title="Fixed">
                   <Fixed code={fixed} />
