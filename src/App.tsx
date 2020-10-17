@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { Container, Row, Col, Tabs, Tab, Spinner } from "react-bootstrap";
 import { CodeEditor } from "@/components/CodeEditor";
 import { RuleConfig } from "@/components/RuleConfig";
@@ -7,18 +7,20 @@ import { ErrorMessage } from "@/components/ErrorMessage";
 import { Header } from "@/components/Header";
 import { Fixed } from "@/components/Fixed";
 import { loadDemoLinter, DemoLinter } from "@/lib/linter";
-import { DEFAULT_CODE, DEFAULT_RULE_CONFIG } from "@/components/constants";
+import {
+  DEFAULT_CODE,
+  DEFAULT_RULE_CONFIG,
+  ECMA_VERSIONS,
+  SOURCE_TYPES,
+  DEFAULT_PARSER_OPTIONS,
+  BOOLEAN_ECMA_FEATURES,
+} from "@/constants";
 import { queryParamsState } from "@/shared/query-params-state";
 import type { FC } from "react";
 import type { Linter } from "eslint";
+import type { ParserOptions, EcmaVersion } from "@typescript-eslint/types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/css/app.css";
-
-const parserOptions = {
-  sourceType: "module",
-  ecmaVersion: 10,
-  project: ["./tsconfig.json"],
-} as const;
 
 export const App: FC = () => {
   const paramsState = queryParamsState.get();
@@ -28,6 +30,10 @@ export const App: FC = () => {
   const [fixed, setFixed] = useState<string>("");
   const [linter, setLinter] = useState<DemoLinter | null>(null);
   const [ruleConfigError, setRuleConfigError] = useState<Error | null>(null);
+  const [parserOptions, setParserOptions] = useState<ParserOptions>(
+    paramsState?.parserOptions ||
+    DEFAULT_PARSER_OPTIONS
+  );
 
   useEffect(() => {
     if (linter) {
@@ -35,12 +41,55 @@ export const App: FC = () => {
       setFixed(fixReport.output);
       setMessages(messages);
     }
-  }, [rules, code, linter]);
+  }, [rules, code, linter, parserOptions]);
 
   useEffect(() => {
     (async () => setLinter(await loadDemoLinter()))();
   }, []);
 
+  const handleCodeEditing = (code: string) => {
+    setCode(code);
+  };
+
+  const handleRuleEditing = (ruleStr: string) => {
+    try {
+      const rules = JSON.parse(ruleStr);
+      setRules(rules);
+      setRuleConfigError(null);
+    } catch (error) {
+      setRuleConfigError(error);
+    }
+  };
+
+  const handleParserOptionsChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const id = event.target.id;
+    const value = event.target.value;
+    if (BOOLEAN_ECMA_FEATURES.some((prop) => prop === id)) {
+      setParserOptions({
+        ...parserOptions,
+        ecmaFeatures: {
+          ...parserOptions.ecmaFeatures,
+          [id]: (event.target as HTMLInputElement).checked,
+        },
+      });
+    } else if ("ecmaVersion" === id) {
+      setParserOptions({
+        ...parserOptions,
+        ecmaVersion: parseInt(value, 10) as EcmaVersion,
+      });
+    } else {
+      setParserOptions({
+        ...parserOptions,
+        [id]: value,
+      });
+    }
+  };
+
+  useEffect(() => {
+    queryParamsState.set({ code, rules, parserOptions});
+  }, [code, rules, parserOptions]);
   return (
     <>
       <Header />
@@ -51,10 +100,7 @@ export const App: FC = () => {
               <Tab eventKey="code" title="Code">
                 <CodeEditor
                   initial={queryParamsState.get().code || DEFAULT_CODE}
-                  onChange={(code) => {
-                    queryParamsState.set({ code, rules });
-                    setCode(code);
-                  }}
+                  onChange={handleCodeEditing}
                   messages={messages}
                 />
               </Tab>
@@ -68,17 +114,54 @@ export const App: FC = () => {
                 <RuleConfig
                   initial={rules}
                   ruleConfig={rules}
-                  onChange={(rulesString) => {
-                    try {
-                      const rules = JSON.parse(rulesString);
-                      setRules(rules);
-                      queryParamsState.set({ code, rules });
-                      setRuleConfigError(null);
-                    } catch (error) {
-                      setRuleConfigError(error);
-                    }
-                  }}
+                  onChange={handleRuleEditing}
                 />
+              </Tab>
+              <Tab eventKey="parserOptions" title="ParserOptions">
+                <div className="parser-options">
+                  <h5>ECMA Features</h5>
+                  {BOOLEAN_ECMA_FEATURES.map((feature) => (
+                    <div className="checkbox">
+                      <input
+                        key={feature}
+                        type="checkbox"
+                        name={feature}
+                        id={feature}
+                        checked={parserOptions.ecmaFeatures?.[feature]}
+                        onChange={handleParserOptionsChange}
+                      />
+                      <label htmlFor={feature}>{feature}</label>
+                    </div>
+                  ))}
+                  <h5>ECMA Version</h5>
+                  <div className="select">
+                    <select
+                      id="ecmaVersion"
+                      value={parserOptions.ecmaVersion}
+                      onChange={handleParserOptionsChange}
+                    >
+                      {ECMA_VERSIONS.map((version) => (
+                        <option key={version} value={version}>
+                          {version}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <h5>Source Type</h5>
+                  <div className="select">
+                    <select
+                      id="sourceType"
+                      value={parserOptions.sourceType}
+                      onChange={handleParserOptionsChange}
+                    >
+                      {SOURCE_TYPES.map((sourceType) => (
+                        <option key={sourceType} value={sourceType}>
+                          {sourceType}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
               </Tab>
             </Tabs>
           </Col>
@@ -94,10 +177,7 @@ export const App: FC = () => {
               <Tabs>
                 <Tab eventKey="messages" title="Messages">
                   {ruleConfigError ? (
-                    <ErrorMessage
-                      origin="ruleconfig.json"
-                      error={ruleConfigError}
-                    />
+                    <ErrorMessage origin="rules.json" error={ruleConfigError} />
                   ) : (
                     <LintMessages messages={messages} />
                   )}

@@ -1,4 +1,4 @@
-import { TS_ESLINT } from "@/lib/constants";
+import { TS_ESLINT_SCOPE } from "@/constants";
 import type { Linter } from "eslint";
 import type { ParserOptions } from "@typescript-eslint/types";
 
@@ -44,7 +44,7 @@ export async function loadDemoLinter(): Promise<DemoLinter> {
   const rules = Object.entries((await plugins).rules).reduce(
     (rules, [name, rule]) => ({
       ...rules,
-      [`${TS_ESLINT}/${name}`]: rule,
+      [`${TS_ESLINT_SCOPE}/${name}`]: rule,
     })
   );
 

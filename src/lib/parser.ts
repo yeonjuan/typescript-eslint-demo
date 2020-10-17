@@ -39,7 +39,7 @@ const extra: any = {
   strict: false,
   tokens: [],
   tsconfigRootDir: "/",
-  useJSXTextNode: false,
+  useJSXTextNode: true,
 };
 
 interface ParseAndGenerateServicesResult<T extends TSESTreeOptions> {
@@ -51,8 +51,10 @@ function parseAndGenerateServices<T extends TSESTreeOptions = TSESTreeOptions>(
   code: string,
   options: T
 ): ParseAndGenerateServicesResult<T> {
-  const { ast, program } = createAstAndProgram(code);
   extra.code = code;
+  extra.jsx = options.jsx;
+
+  const { ast, program } = createAstAndProgram(code, extra);
   const { estree, astMaps } = astConverter(ast!, extra, true);
   return {
     ast: estree as AST<T>,
@@ -67,10 +69,22 @@ function parseAndGenerateServices<T extends TSESTreeOptions = TSESTreeOptions>(
 
 export function parseForESLint(
   code: string,
-  options: ParserOptions
+  parserOptions: ParserOptions
 ): ParseForESLintResult {
-  const { ast, services } = parseAndGenerateServices(code, {});
-  const scopeManager = analyze(ast, options);
+  const TSESOptions: TSESTreeOptions = Object.assign(parserOptions, {
+    jsx: parserOptions.ecmaFeatures?.jsx || false,
+    useJSXTextNode: true,
+  });
+
+  const { ast, services } = parseAndGenerateServices(code, TSESOptions);
+
+  const analyzeOptions = {
+    ecmaVersion: parserOptions.ecmaVersion,
+    globalReturn: parserOptions.ecmaFeatures?.globalReturn,
+    sourceType: parserOptions.sourceType,
+  };
+
+  const scopeManager = analyze(ast, analyzeOptions);
   return { ast, services, scopeManager, visitorKeys };
 }
 

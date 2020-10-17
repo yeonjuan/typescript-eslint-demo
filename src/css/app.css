@@ -13,3 +13,21 @@ main {
 .versions {
   float: right;
 }
+.parser-options {
+  padding: 10px;
+}
+.parser-options h5 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.checkbox {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+.checkbox input[type="checkbox"] {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.select {
+  margin-left: 27px;
+}

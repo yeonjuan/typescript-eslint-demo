@@ -1,9 +1,10 @@
-import queryString from "query-string";
 import type { Linter } from "eslint";
+import type { ParserOptions } from "@typescript-eslint/parser";
 
 interface QueryParamsState {
   code?: string;
   rules?: Linter.RulesRecord;
+  parserOptions?: ParserOptions
 }
 
 export const queryParamsState = {

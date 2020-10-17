@@ -9,19 +9,22 @@ const TS_ESLINT_DOCS_PATH =
 
 const ESLINT_DOCS_PATH = "https://eslint.org/docs/rules/";
 
-function isTSESLintRule (ruleId: string) {
-  return ruleId.startsWith('@typescript-eslint');
+function isTSESLintRule(ruleId: string) {
+  return ruleId.startsWith("@typescript-eslint");
 }
 
-function getDocLink (ruleId: string | null) {
+function getDocLink(ruleId: string | null) {
   if (ruleId) {
     if (isTSESLintRule(ruleId)) {
-      return `${TS_ESLINT_DOCS_PATH}${ruleId.replace(`${TS_ESLINT_SCOPE}/`, '')}.md`;
+      return `${TS_ESLINT_DOCS_PATH}${ruleId.replace(
+        `${TS_ESLINT_SCOPE}/`,
+        ""
+      )}.md`;
     } else {
       return `${ESLINT_DOCS_PATH}${ruleId}`;
     }
   }
-  return '';
+  return "";
 }
 
 interface Props {
