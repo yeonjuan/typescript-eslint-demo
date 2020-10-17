@@ -16,6 +16,9 @@ ul {
 li {
   list-style: none;
 }
+.version-list {
+  margin-bottom: 0;
+}
 .version {
   font-size: 10px;
 }
