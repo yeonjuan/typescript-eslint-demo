@@ -1,7 +1,7 @@
 {
   "version": "0.2.1",
   "name": "typescript-eslint-demo",
-  "description": "",
+  "description": "An online playground for [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) - [🚀 Playground](https://yeonjuan.github.io/typescript-eslint-demo/)",
   "icons": {
     "60": "assets/firefox_app_60x60.png",
     "128": "assets/firefox_app_128x128.png",

@@ -1,7 +1,7 @@
 {
   "name": "typescript-eslint-demo",
   "short_name": "typescript-eslint-demo",
-  "description": "",
+  "description": "An online playground for [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) - [🚀 Playground](https://yeonjuan.github.io/typescript-eslint-demo/)",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",
