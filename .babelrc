@@ -10,5 +10,6 @@
     ],
     "@babel/preset-typescript",
     "@babel/preset-react"
-  ]
+  ],
+  "ignore": ["**/__tests__"]
 }

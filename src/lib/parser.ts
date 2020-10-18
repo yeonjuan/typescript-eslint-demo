@@ -2,6 +2,10 @@ import { analyze } from "@typescript-eslint/scope-manager";
 import { visitorKeys } from "@typescript-eslint/typescript-estree";
 import { astConverter } from "../../node_modules/@typescript-eslint/typescript-estree/dist/ast-converter";
 import { createAstAndProgram } from "@/lib/create-ast-program";
+import {
+  toAnalyzeOptions,
+  toTSESTOptions,
+} from "@/lib/parser-options-converter";
 import type { ParserOptions, TSESTree } from "@typescript-eslint/types";
 import type {
   ParserServices,
@@ -54,7 +58,7 @@ function parseAndGenerateServices<T extends TSESTreeOptions = TSESTreeOptions>(
   extra.code = code;
   extra.jsx = options.jsx;
 
-  const { ast, program } = createAstAndProgram(code, extra);
+  const { ast, program } = createAstAndProgram(code, options);
   const { estree, astMaps } = astConverter(ast!, extra, true);
   return {
     ast: estree as AST<T>,
@@ -71,19 +75,9 @@ export function parseForESLint(
   code: string,
   parserOptions: ParserOptions
 ): ParseForESLintResult {
-  const TSESOptions: TSESTreeOptions = Object.assign(parserOptions, {
-    jsx: parserOptions.ecmaFeatures?.jsx || false,
-    useJSXTextNode: true,
-  });
-
-  const { ast, services } = parseAndGenerateServices(code, TSESOptions);
-
-  const analyzeOptions = {
-    ecmaVersion: parserOptions.ecmaVersion,
-    globalReturn: parserOptions.ecmaFeatures?.globalReturn,
-    sourceType: parserOptions.sourceType,
-  };
-
+  const tsesOptions = toTSESTOptions(parserOptions);
+  const { ast, services } = parseAndGenerateServices(code, tsesOptions);
+  const analyzeOptions = toAnalyzeOptions(parserOptions);
   const scopeManager = analyze(ast, analyzeOptions);
   return { ast, services, scopeManager, visitorKeys };
 }
