@@ -37,8 +37,11 @@ export const Header: FC = () => (
         </Navbar.Text>
         <ul className="version-list">
           <li>
-          <div className="version">
-              <a>@typescript-eslint {pkgJson.dependencies["@typescript-eslint/eslint-plugin"]}</a>
+            <div className="version">
+              <a>
+                @typescript-eslint{" "}
+                {pkgJson.dependencies["@typescript-eslint/eslint-plugin"]}
+              </a>
             </div>
           </li>
           <li>

@@ -31,8 +31,7 @@ export const App: FC = () => {
   const [linter, setLinter] = useState<DemoLinter | null>(null);
   const [ruleConfigError, setRuleConfigError] = useState<Error | null>(null);
   const [parserOptions, setParserOptions] = useState<ParserOptions>(
-    paramsState?.parserOptions ||
-    DEFAULT_PARSER_OPTIONS
+    paramsState?.parserOptions || DEFAULT_PARSER_OPTIONS
   );
 
   useEffect(() => {
@@ -88,7 +87,7 @@ export const App: FC = () => {
   };
 
   useEffect(() => {
-    queryParamsState.set({ code, rules, parserOptions});
+    queryParamsState.set({ code, rules, parserOptions });
   }, [code, rules, parserOptions]);
   return (
     <>

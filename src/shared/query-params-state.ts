@@ -4,7 +4,7 @@ import type { ParserOptions } from "@typescript-eslint/parser";
 interface QueryParamsState {
   code?: string;
   rules?: Linter.RulesRecord;
-  parserOptions?: ParserOptions
+  parserOptions?: ParserOptions;
 }
 
 export const queryParamsState = {
