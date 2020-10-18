@@ -94,7 +94,7 @@ export const App: FC = () => {
       <Header />
       <Container>
         <Row>
-          <Col md={12}>
+          <Col>
             <Tabs>
               <Tab eventKey="code" title="Code">
                 <CodeEditor
@@ -120,9 +120,8 @@ export const App: FC = () => {
                 <div className="parser-options">
                   <h5>ECMA Features</h5>
                   {BOOLEAN_ECMA_FEATURES.map((feature) => (
-                    <div className="checkbox">
+                    <div className="checkbox" key={feature}>
                       <input
-                        key={feature}
                         type="checkbox"
                         name={feature}
                         id={feature}
