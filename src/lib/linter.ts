@@ -32,7 +32,7 @@ function loadParser() {
 }
 
 async function loadESLinter() {
-    // @ts-ignore
+  // @ts-ignore
   return import("eslint/lib/linter/linter");
 }
 
