@@ -5,7 +5,7 @@ import type { FC } from "react";
 import "@/css/header.css";
 
 export const Header: FC = () => (
-  <Navbar bg="light">
+  <Navbar bg="light" expand="lg">
     <Container>
       <Navbar.Brand>
         TypeScript ESLint Demo
