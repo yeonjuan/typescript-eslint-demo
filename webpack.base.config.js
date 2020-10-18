@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   module: {
@@ -43,6 +44,13 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.png$/,
+        loader: "file-loader",
+        options: {
+          outputPath: "assets",
+        },
+      },
     ],
   },
   resolve: {
@@ -73,6 +81,11 @@ module.exports = {
       filename: "./index.html",
     }),
     new FaviconsWebpackPlugin(path.resolve(__dirname, "./assets/favicon.png")),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, "assets/share.png"), to: "assets" },
+      ],
+    }),
   ],
   output: {
     filename: "[name].[hash].js",
