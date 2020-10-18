@@ -23,6 +23,7 @@ export interface DemoLinter {
 }
 
 function loadPlugin(): Promise<ESLintPlugin> {
+  // @ts-ignore
   return import("@typescript-eslint/eslint-plugin");
 }
 
@@ -31,6 +32,7 @@ function loadParser() {
 }
 
 async function loadESLinter() {
+    // @ts-ignore
   return import("eslint/lib/linter/linter");
 }
 

@@ -13,7 +13,8 @@
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
