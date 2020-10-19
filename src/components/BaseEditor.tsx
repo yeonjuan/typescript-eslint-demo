@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import CodeMirror, { TextMarker } from "codemirror";
-import { EDITING_TIMEOUT } from "@/components/constants";
+import { EDITING_TIMEOUT } from "@/constants";
 import { debounce } from "@/shared/debounce";
 import type { FC } from "react";
 import type { Editor } from "codemirror";
