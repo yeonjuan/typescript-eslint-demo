@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { Container, Row, Col, Tabs, Tab, Spinner } from "react-bootstrap";
+import JSON5 from "json5";
 import { CodeEditor } from "@/components/CodeEditor";
 import { RuleConfig } from "@/components/RuleConfig";
 import { LintMessages } from "@/components/LintMessages";
@@ -52,7 +53,7 @@ export const App: FC = () => {
 
   const handleRuleEditing = (ruleStr: string) => {
     try {
-      const rules = JSON.parse(ruleStr);
+      const rules = JSON5.parse(ruleStr);
       setRules(rules);
       setRuleConfigError(null);
     } catch (error) {
@@ -109,7 +110,7 @@ export const App: FC = () => {
         <Row>
           <Col className="bottom-col">
             <Tabs>
-              <Tab eventKey="rules" title="Rules">
+              <Tab eventKey="rules" title="Rules (json5)">
                 <RuleConfig
                   initial={rules}
                   ruleConfig={rules}

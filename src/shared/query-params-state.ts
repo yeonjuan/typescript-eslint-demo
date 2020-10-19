@@ -1,3 +1,4 @@
+import JSON5 from "json5";
 import type { Linter } from "eslint";
 import type { ParserOptions } from "@typescript-eslint/parser";
 
@@ -13,12 +14,12 @@ export const queryParamsState = {
       const decoded = decodeURIComponent(
         escape(atob(location.hash.replace("#", "")))
       );
-      return JSON.parse(decoded);
+      return JSON5.parse(decoded);
     } catch {}
     return {};
   },
   set(state: QueryParamsState): void {
-    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+    const encoded = btoa(unescape(encodeURIComponent(JSON5.stringify(state))));
     location.hash = encoded;
   },
 };

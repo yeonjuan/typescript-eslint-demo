@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import CodeMirror from "codemirror";
 import { EDITING_TIMEOUT } from "@/constants";
 import { debounce } from "@/shared/debounce";
+import JSON5 from "json5";
 import type { FC } from "react";
 import type { Linter } from "eslint";
 import "codemirror/lib/codemirror.css";
@@ -25,7 +26,7 @@ const CODE_MIRROR_OPTIONS = {
 
 export const RuleConfig: FC<Props> = (props) => {
   const [text, setText] = useState<string>(
-    JSON.stringify(props.initial, null, 2)
+    JSON5.stringify(props.initial, null, 2)
   );
   const ref = useRef<HTMLTextAreaElement>(null);
 
