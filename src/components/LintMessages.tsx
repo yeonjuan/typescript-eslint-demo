@@ -1,5 +1,5 @@
 import React from "react";
-import { TS_ESLINT_SCOPE } from "@/components/constants";
+import { TS_ESLINT_SCOPE } from "@/constants";
 import { Alert } from "react-bootstrap";
 import type { FC } from "react";
 import type { Linter } from "eslint";
