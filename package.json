@@ -8,7 +8,7 @@
     "format": "prettier . --write",
     "//lint": "run \"eslint\"",
     "lint": "eslint src",
-    "//dev": "run \"webpac dev server\"",
+    "//dev": "run \"webpack dev server\"",
     "dev": "webpack-dev-server --open --config webpack.dev.config",
     "//build": "builds a website",
     "build": "ts-node scripts/rm-rf.ts ./dist && webpack --config webpack.prod.config",
@@ -20,7 +20,9 @@
     "//deploy": "build a website and publish it to Github gh-pages",
     "deploy": "npm run build && gh-pages -d dist",
     "//test": "run tests",
-    "test": "jest"
+    "test": "jest",
+    "//test:all": "run all tests",
+    "test:all": "npm run lint && npm run check && npm run test"
   },
   "repository": {
     "type": "git",
