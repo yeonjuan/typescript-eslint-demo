@@ -1,6 +1,6 @@
 {
   "name": "typescript-eslint-demo",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An online playground for [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) - [🚀 Playground](https://yeonjuan.github.io/typescript-eslint-demo/)",
   "main": "index.js",
   "scripts": {
@@ -35,12 +35,12 @@
   },
   "homepage": "https://github.com/yeonjuan/typescript-eslint-demo#readme",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "4.4.1",
-    "@typescript-eslint/parser": "4.4.0",
+    "@typescript-eslint/eslint-plugin": "4.5.0",
+    "@typescript-eslint/parser": "4.5.0",
     "bootstrap": "^4.5.2",
     "codemirror": "^5.58.1",
     "core-js": "^3.6.5",
-    "eslint": "^7.10.0",
+    "eslint": "7.11.0",
     "esquery": "^1.3.1",
     "json5": "^2.1.3",
     "query-string": "^6.13.5",
