@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
-function resolveToProjRoot (relPath) {
+function resolveToProjRoot(relPath) {
   return path.resolve(__dirname, relPath);
 }
 
@@ -83,9 +83,7 @@ module.exports = {
     }),
     new FaviconsWebpackPlugin(resolveToProjRoot("assets/favicon.png")),
     new CopyPlugin({
-      patterns: [
-        { from: resolveToProjRoot("assets/share.png"), to: "assets" },
-      ],
+      patterns: [{ from: resolveToProjRoot("assets/share.png"), to: "assets" }],
     }),
   ],
   output: {

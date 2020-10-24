@@ -10,12 +10,15 @@ interface Props {
   messages?: Linter.LintMessage[];
 }
 
-function toMarkerPos (pos: number): number {
+function toMarkerPos(pos: number): number {
   return pos - 1;
 }
 
 function messageToMarker(message: Linter.LintMessage): Marker {
-  const from = { line: toMarkerPos(message.line), ch: toMarkerPos(message.column) };
+  const from = {
+    line: toMarkerPos(message.line),
+    ch: toMarkerPos(message.column),
+  };
   const to = {
     line: toMarkerPos(message.endLine || message.line) - 1,
     ch: toMarkerPos(message.endColumn || message.column) - 1,
