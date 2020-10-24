@@ -4,6 +4,10 @@ const webpack = require("webpack");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
+function resolveToProjRoot (relPath) {
+  return path.resolve(__dirname, relPath);
+}
+
 module.exports = {
   module: {
     rules: [
@@ -21,13 +25,10 @@ module.exports = {
           /\/\@eslint\/.*\/config-array-factory/,
           /\/\@eslint\/.*\/relative-module-resolver/,
           /\/eslint\/eslint\.js/,
-          // /\/@typescript-eslint\/experimental-utils\/dist\/ts-eslint/,
           /\/@typescript-eslint\/experimental-utils\/dist\/ts-eslint\/RuleTester.js/,
           /\/@typescript-eslint\/experimental-utils\/dist\/eslint-utils\/RuleTester.js/,
           /\/@typescript-eslint\/.*\/CLIEngine/,
-          // /\/@typescript-eslint\/.*\/globby/,
           /\/@typescript-eslint\/.*\/create-program\/createWatchProgram.js/,
-          /\.d\.ts$/,
         ],
         use: "null-loader",
       },
@@ -66,24 +67,24 @@ module.exports = {
   plugins: [
     new webpack.NormalModuleReplacementPlugin(
       /resolve\-from/,
-      path.resolve(__dirname, "./src/modules/resolve-from.js")
+      resolveToProjRoot("src/modules/resolve-from.js")
     ),
     new webpack.NormalModuleReplacementPlugin(
       /esquery/,
-      path.resolve(__dirname, "./node_modules/esquery/dist/esquery.js")
+      resolveToProjRoot("node_modules/esquery/dist/esquery.js")
     ),
     new webpack.NormalModuleReplacementPlugin(
       /globby/,
-      path.resolve(__dirname, "./src/modules/globby.js")
+      resolveToProjRoot("src/modules/globby.js")
     ),
     new HtmlPlugin({
       template: "./src/index.html",
       filename: "./index.html",
     }),
-    new FaviconsWebpackPlugin(path.resolve(__dirname, "./assets/favicon.png")),
+    new FaviconsWebpackPlugin(resolveToProjRoot("assets/favicon.png")),
     new CopyPlugin({
       patterns: [
-        { from: path.resolve(__dirname, "assets/share.png"), to: "assets" },
+        { from: resolveToProjRoot("assets/share.png"), to: "assets" },
       ],
     }),
   ],
