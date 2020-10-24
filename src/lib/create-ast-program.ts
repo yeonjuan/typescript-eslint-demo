@@ -1,10 +1,4 @@
-import {
-  createProgram,
-  ScriptTarget,
-  ModuleKind,
-  JsxEmit,
-  ScriptKind,
-} from "typescript";
+import { createProgram, ScriptKind } from "typescript";
 import type { SourceFile, Program } from "typescript";
 import { createCompilerHost } from "./compiler-host";
 import { createFilesIncludeLibs } from "./files";
