@@ -47,10 +47,6 @@ export const App: FC = () => {
     (async () => setLinter(await loadDemoLinter()))();
   }, []);
 
-  const handleCodeEditing = (code: string) => {
-    setCode(code);
-  };
-
   const handleRuleEditing = (ruleStr: string) => {
     try {
       const rules = JSON5.parse(ruleStr);
@@ -100,7 +96,7 @@ export const App: FC = () => {
               <Tab eventKey="code" title="Code">
                 <CodeEditor
                   initial={queryParamsState.get().code || DEFAULT_CODE}
-                  onChange={handleCodeEditing}
+                  onChange={setCode}
                   messages={messages}
                 />
               </Tab>
