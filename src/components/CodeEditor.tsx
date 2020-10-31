@@ -20,8 +20,8 @@ function messageToMarker(message: Linter.LintMessage): Marker {
     ch: toMarkerPos(message.column),
   };
   const to = {
-    line: toMarkerPos(message.endLine || message.line) - 1,
-    ch: toMarkerPos(message.endColumn || message.column) - 1,
+    line: toMarkerPos(message.endLine || message.line),
+    ch: toMarkerPos(message.endColumn || message.column),
   };
   return [from, to];
 }
