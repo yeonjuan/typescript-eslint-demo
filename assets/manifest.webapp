@@ -1,5 +1,5 @@
 {
-  "version": "0.3.2",
+  "version": "0.3.3",
   "name": "typescript-eslint-demo",
   "description": "An online playground for [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) - [🚀 Playground](https://yeonjuan.github.io/typescript-eslint-demo/)",
   "icons": {
