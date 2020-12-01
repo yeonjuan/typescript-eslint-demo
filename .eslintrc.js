@@ -11,4 +11,16 @@ module.exports = {
   rules: {
     "@typescript-eslint/ban-ts-comment": "off",
   },
+  overrides: [
+    {
+      files: ["*.html"],
+      plugins: ["@html-eslint"],
+      parser: "@html-eslint/parser",
+      rules: {
+        "@html-eslint/require-lang": "error",
+        "@html-eslint/require-title": "error",
+        "@html-eslint/no-multiple-h1": "error"
+      }
+    },
+  ],
 };
