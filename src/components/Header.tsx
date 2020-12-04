@@ -38,7 +38,7 @@ export const Header: FC = () => (
         <ul className="version-list">
           <li>
             <div className="version">
-              <a>
+              <a href="https://github.com/typescript-eslint/typescript-eslint">
                 @typescript-eslint{" "}
                 {pkgJson.dependencies["@typescript-eslint/eslint-plugin"]}
               </a>
@@ -46,12 +46,16 @@ export const Header: FC = () => (
           </li>
           <li>
             <div className="version">
-              <a>typescript {pkgJson.dependencies["typescript"]}</a>
+              <a href="https://github.com/microsoft/TypeScript">
+                typescript {pkgJson.dependencies["typescript"]}
+              </a>
             </div>
           </li>
           <li>
             <div className="version">
-              <a>eslint {pkgJson.dependencies["eslint"]}</a>
+              <a href="https://github.com/eslint/eslint">
+                eslint {pkgJson.dependencies["eslint"]}
+              </a>
             </div>
           </li>
         </ul>
