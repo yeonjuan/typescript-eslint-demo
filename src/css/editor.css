@@ -1,8 +1,13 @@
 .CodeMirror {
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+  height: 100%;
 }
 
 .editor-error {
   text-decoration: underline dashed red;
+}
+
+.editor {
+  height: 100%;
 }

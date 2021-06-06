@@ -1,0 +1,11 @@
+.divider {
+  background-color: #ddd;
+}
+
+.divider.horizontal {
+  width: 5px;
+}
+
+.divider.vertical {
+  height: 5px;
+}

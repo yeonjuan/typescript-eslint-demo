@@ -7,6 +7,7 @@ import { LintMessages } from "@/components/LintMessages";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Header } from "@/components/Header";
 import { Fixed } from "@/components/Fixed";
+import { SplitPanel } from '@/components/SplitPanel';
 import { loadDemoLinter, DemoLinter } from "@/lib/linter";
 import {
   DEFAULT_CODE,
@@ -17,12 +18,11 @@ import {
   BOOLEAN_ECMA_FEATURES,
 } from "@/constants";
 import { queryParamsState } from "@/shared/query-params-state";
-import {RecoilRoot} from 'recoil';
 import type { FC } from "react";
 import type { Linter } from "eslint";
 import type { ParserOptions, EcmaVersion } from "@typescript-eslint/types";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@/css/app.css";
+import './App.css';
 
 export const App: FC = () => {
   const paramsState = queryParamsState.get();
@@ -88,25 +88,20 @@ export const App: FC = () => {
     queryParamsState.set({ code, rules, parserOptions });
   }, [code, rules, parserOptions]);
   return (
-    <RecoilRoot>
-      <Header />
-      <Container>
-        <Row>
-          <Col>
-            <Tabs>
-              <Tab eventKey="code" title="Code">
-                <CodeEditor
-                  initial={queryParamsState.get().code || DEFAULT_CODE}
-                  onChange={setCode}
-                  messages={messages}
-                />
-              </Tab>
-            </Tabs>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="bottom-col">
-            <Tabs>
+    <div className="app">
+        <Header/>
+        <SplitPanel>
+          <div style={{width: '100%', display: 'flex'}}>
+            <SplitPanel vertical={true}>
+                <div className="top">
+                  <CodeEditor
+                    initial={queryParamsState.get().code || DEFAULT_CODE}
+                    onChange={setCode}
+                    messages={messages}
+                  />
+                </div>
+                <div className="bottom">
+                <Tabs>
               <Tab eventKey="rules" title="Rules (json5)">
                 <RuleConfig
                   initial={rules}
@@ -160,9 +155,12 @@ export const App: FC = () => {
                 </div>
               </Tab>
             </Tabs>
-          </Col>
-          <Col className="bottom-col">
-            {linter === null ? (
+
+                </div>
+            </SplitPanel>
+          </div>
+          <div style={{width: '100%'}}> 
+          {linter === null ? (
               <div>
                 <Spinner animation="border" role="status" variant="primary">
                   <span className="sr-only">Loading...</span>
@@ -182,10 +180,9 @@ export const App: FC = () => {
                   <Fixed code={fixed} />
                 </Tab>
               </Tabs>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    </RecoilRoot>
+            )}  
+          </div>
+        </SplitPanel>
+    </div>
   );
 };

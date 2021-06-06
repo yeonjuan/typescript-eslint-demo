@@ -1,0 +1,28 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  font-size: 13px;
+}
+
+.top {
+  width: 100%;
+}
+
+.bottom {
+  width: 100%;
+}
+
+
+.tab-content {
+  height: calc(100% - 47px);
+}
+
+.tab-pane {
+  height: 100%;
+}
+
+.rule-editor {
+  height: 100%;
+}

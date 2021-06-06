@@ -1,0 +1,21 @@
+.divider {
+  background-color: #ccc;
+}
+
+.divider.horizontal {
+  width: 3px;
+}
+
+.horizontal:hover {
+  background-color: #888;
+  cursor: col-resize;
+}
+
+.vertical:hover {
+  background-color: #888;
+  cursor: row-resize;
+}
+
+.divider.vertical {
+  height: 3px;
+}
