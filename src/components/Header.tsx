@@ -6,7 +6,7 @@ import "@/css/header.css";
 
 export const Header: FC = () => (
   <Navbar bg="light" expand="lg" style={{ borderBottom: "1px solid #ddd" }}>
-    <Container>
+    <Container style={{marginLeft: 0, marginRight: 0}}>
       <Navbar.Brand>
         TypeScript ESLint Demo
         <Badge variant="secondary" className="version-badge">
