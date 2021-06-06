@@ -1,1 +1,1 @@
-export {SplitPanel} from './SplitPanel';
+export { SplitPanel } from "./SplitPanel";

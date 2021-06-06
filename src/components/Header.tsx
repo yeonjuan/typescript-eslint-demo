@@ -5,7 +5,7 @@ import type { FC } from "react";
 import "@/css/header.css";
 
 export const Header: FC = () => (
-  <Navbar bg="light" expand="lg" style={{borderBottom: '1px solid #ddd'}}>
+  <Navbar bg="light" expand="lg" style={{ borderBottom: "1px solid #ddd" }}>
     <Container>
       <Navbar.Brand>
         TypeScript ESLint Demo

@@ -1,6 +1,9 @@
 import React from "react";
 import { TS_ESLINT_SCOPE } from "@/constants";
 import { Alert } from "react-bootstrap";
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { ErrorMessage } from "@/components/ErrorMessage";
+import * as states from "@/states";
 import type { FC } from "react";
 import type { Linter } from "eslint";
 
@@ -27,18 +30,30 @@ function getDocLink(ruleId: string | null) {
   return "";
 }
 
-interface Props {
-  messages?: Linter.LintMessage[];
-}
+export const LintMessages: FC = () => {
+  const lintResultLoadable = useRecoilValueLoadable(states.lintResultState);
+  const ruleConfig = useRecoilValue(states.rulesConfigState);
 
-export const LintMessages: FC<Props> = (props) => {
-  if (!props.messages?.length) {
+  if (ruleConfig.error) {
+    return <ErrorMessage origin="rules.json" error={ruleConfig.error} />;
+  }
+
+  let messages: Linter.LintMessage[] = [];
+
+  if (lintResultLoadable.state === "hasValue") {
+    messages = lintResultLoadable.contents.messages;
+  }
+  if (lintResultLoadable.state === "loading") {
+    return <></>;
+  }
+
+  if (!messages.length) {
     return <Alert variant="success"> Lint Free :) </Alert>;
   }
 
   return (
     <>
-      {props.messages?.map(
+      {messages?.map(
         ({ line = 0, column = 0, message: lintMsg, ruleId, fatal }, index) => {
           const variant = fatal ? "danger" : "primary";
           const key = `lint-msg-${index}`;

@@ -1,7 +1,5 @@
-import ReactJson from 'react-json-view'
+import ReactJson from "react-json-view";
 
 export const ESTreeASTViewer = (ast: any) => {
-  return (
-    <ReactJson src={ast}/>
-  )
+  return <ReactJson src={ast} />;
 };
